@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><structure>
+	<type>turing</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>100.0</x>
+			<y>200.0</y>
+			<initial/>
+		</state>
+		<state id="1" name="q1">
+			<x>300.0</x>
+			<y>80.0</y>
+		</state>
+		<state id="2" name="q2">
+			<x>300.0</x>
+			<y>320.0</y>
+		</state>
+		<state id="3" name="q3">
+			<x>520.0</x>
+			<y>200.0</y>
+		</state>
+		<state id="4" name="qA">
+			<x>720.0</x>
+			<y>200.0</y>
+			<final/>
+		</state>
+		<state id="5" name="qR">
+			<x>520.0</x>
+			<y>400.0</y>
+		</state>
+		<!--The list of transitions.-->
+		<!-- q0: marca um 0 como X e vai procurar o 1 correspondente -->
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>0</read>
+			<write>X</write>
+			<move>R</move>
+		</transition>
+		<!-- q0: encontrou Y, nao ha mais 0 pendente -> verificar o restante -->
+		<transition>
+			<from>0</from>
+			<to>3</to>
+			<read>Y</read>
+			<write>Y</write>
+			<move>R</move>
+		</transition>
+		<!-- q0: 1 sem 0 correspondente -> rejeita -->
+		<transition>
+			<from>0</from>
+			<to>5</to>
+			<read>1</read>
+			<write>1</write>
+			<move>S</move>
+		</transition>
+		<!-- q0: entrada vazia (n >= 1 exigido) -> rejeita -->
+		<transition>
+			<from>0</from>
+			<to>5</to>
+			<read/>
+			<write/>
+			<move>S</move>
+		</transition>
+		<!-- q1: avanca ate achar um 1 -->
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>0</read>
+			<write>0</write>
+			<move>R</move>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>Y</read>
+			<write>Y</write>
+			<move>R</move>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>1</read>
+			<write>Y</write>
+			<move>L</move>
+		</transition>
+		<!-- q1: acabou a fita sem achar 1 -> rejeita -->
+		<transition>
+			<from>1</from>
+			<to>5</to>
+			<read/>
+			<write/>
+			<move>S</move>
+		</transition>
+		<!-- q2: volta para a esquerda ate o ultimo X -->
+		<transition>
+			<from>2</from>
+			<to>2</to>
+			<read>0</read>
+			<write>0</write>
+			<move>L</move>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>2</to>
+			<read>Y</read>
+			<write>Y</write>
+			<move>L</move>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>0</to>
+			<read>X</read>
+			<write>X</write>
+			<move>R</move>
+		</transition>
+		<!-- q3: so podem restar Y's; fim da fita -> aceita -->
+		<transition>
+			<from>3</from>
+			<to>3</to>
+			<read>Y</read>
+			<write>Y</write>
+			<move>R</move>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read/>
+			<write/>
+			<move>S</move>
+		</transition>
+		<!-- q3: sobrou 1 ou 0 -> rejeita -->
+		<transition>
+			<from>3</from>
+			<to>5</to>
+			<read>1</read>
+			<write>1</write>
+			<move>S</move>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>5</to>
+			<read>0</read>
+			<write>0</write>
+			<move>S</move>
+		</transition>
+	</automaton>
+</structure>
